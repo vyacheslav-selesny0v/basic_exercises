@@ -12,7 +12,16 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
+
+names = dict()
+
+for student in students:
+    if student['first_name'] not in names.keys():
+        names[student['first_name']] = 1
+    else:
+        names[student['first_name']] += 1
+for name, count in names.items():
+    print(f'{name}: {count}')
 
 
 # Задание 2
@@ -26,7 +35,14 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+
+names = dict()
+for student in students:
+    if student['first_name'] not in names.keys():
+        names[student['first_name']] = 1
+    else:
+        names[student['first_name']] += 1
+print(max(names, key=names.get))
 
 
 # Задание 3
