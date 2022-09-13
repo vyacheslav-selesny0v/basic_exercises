@@ -5,7 +5,11 @@ print(word[-1])
 
 # Вывести количество букв "а" в слове
 word = 'Архангельск'
-print(len(word))
+count = 0
+for i in word.lower():
+    if i == 'а':
+        count += 1
+print(count)
 
 
 # Вывести количество гласных букв в слове
@@ -30,4 +34,4 @@ for i in sentence.split():
 
 # Вывести усреднённую длину слова в предложении
 sentence = 'Мы приехали в гости'
-print(len(sentence)/len(sentence.split()))
+print(len(sentence.replace(' ', ''))/len(sentence.split()))

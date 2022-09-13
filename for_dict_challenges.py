@@ -16,7 +16,7 @@ students = [
 names = dict()
 
 for student in students:
-    if student['first_name'] not in names.keys():
+    if student['first_name'] not in names:
         names[student['first_name']] = 1
     else:
         names[student['first_name']] += 1
@@ -67,7 +67,17 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
+names = dict()
+
+for school_class, students in enumerate(school_students, start=1):
+    for student in students:
+        if student['first_name'] not in names:
+            names[student['first_name']] = 1
+        else:
+            names[student['first_name']] += 1
+        max_val = max(names.values())
+        max_names = [k for k, v in names.items() if v == max_val]
+    print(f'{school_class}:', ', '.join(max_names))
 
 
 # Задание 4
@@ -88,7 +98,15 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+for school_class in school:
+    count_man = 0
+    count_girl = 0
+    for student in school_class["students"]:
+        if student["first_name"] in is_male and is_male[student["first_name"]] == True:
+            count_man += 1
+        else:
+            count_girl += 1
+    print(f'Класс {school_class["class"]}: девочки {count_girl}, мальчики {count_man}')
 
 
 # Задание 5
