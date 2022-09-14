@@ -51,6 +51,8 @@ print(max(names, key=names.get))
 # Самое частое имя в классе 1: Вася
 # Самое частое имя в классе 2: Маша
 
+from collections import Counter
+
 school_students = [
     [  # это – первый класс
         {'first_name': 'Вася'},
@@ -67,17 +69,12 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-names = dict()
 
-for school_class, students in enumerate(school_students, start=1):
-    for student in students:
-        if student['first_name'] not in names:
-            names[student['first_name']] = 1
-        else:
-            names[student['first_name']] += 1
-        max_val = max(names.values())
-        max_names = [k for k, v in names.items() if v == max_val]
-    print(f'{school_class}:', ', '.join(max_names))
+
+for school_class, val in enumerate(school_students, start=1):
+    names = [name['first_name'] for name in val]
+    names_count = Counter(names)
+    print(f'Самое частое имя в классе {school_class}: {names_count.most_common()[0][0]}')
 
 
 # Задание 4
@@ -125,5 +122,31 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
 
+school_cl = dict()
+
+for school_class in school:
+    count_man = 0
+    count_girl = 0
+    for student in school_class["students"]:
+        if student["first_name"] in is_male and is_male[student["first_name"]] == True:
+            count_man += 1
+        else:
+            count_girl += 1
+        school_cl[school_class['class']] = [{'man': count_man}, {'girl': count_girl}]
+
+max_count_man = 0
+max_count_girl = 0
+for k, v in school_cl.items():
+    if v[0]['man'] >= max_count_man:
+        max_count_man = v[0]['man']
+    else:
+        v[0]['man'] = v[0]['man']
+    
+    if v[1]['girl'] >= max_count_girl:
+        max_count_girl = v[1]['girl']
+    else:
+        v[1]['girl'] = v[1]['girl']
+        
+print(f'Больше всего мальчиков в классе', *[k for k, v in school_cl.items() if v[0]['man'] == max_count_man])
+print(f'Больше всего девочек в классе', *[k for k, v in school_cl.items() if v[1]['girl'] == max_count_girl])
