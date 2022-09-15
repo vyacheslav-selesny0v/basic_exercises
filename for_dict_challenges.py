@@ -126,27 +126,30 @@ is_male = {
 school_cl = dict()
 
 for school_class in school:
+    
+    max_count_man = 0
+    max_count_girl = 0
     count_man = 0
     count_girl = 0
+    
     for student in school_class["students"]:
         if student["first_name"] in is_male and is_male[student["first_name"]] == True:
             count_man += 1
         else:
             count_girl += 1
-        school_cl[school_class['class']] = [{'man': count_man}, {'girl': count_girl}]
+        school_cl[school_class['class']] = {'man': count_man, 'girl': count_girl}
 
-max_count_man = 0
-max_count_girl = 0
-for k, v in school_cl.items():
-    if v[0]['man'] >= max_count_man:
-        max_count_man = v[0]['man']
-    else:
-        v[0]['man'] = v[0]['man']
-    
-    if v[1]['girl'] >= max_count_girl:
-        max_count_girl = v[1]['girl']
-    else:
-        v[1]['girl'] = v[1]['girl']
+    for k, v in school_cl.items():
+        if v['man'] >= max_count_man:
+            max_count_man = v['man']
+        else:
+            v['man'] = v['man']
         
-print(f'Больше всего мальчиков в классе', *[k for k, v in school_cl.items() if v[0]['man'] == max_count_man])
-print(f'Больше всего девочек в классе', *[k for k, v in school_cl.items() if v[1]['girl'] == max_count_girl])
+        if v['girl'] >= max_count_girl:
+            max_count_girl = v['girl']
+        else:
+            v['girl'] = v['girl']
+
+       
+print(f'Больше всего мальчиков в классе', *[k for k, v in school_cl.items() if v['man'] == max_count_man])
+print(f'Больше всего девочек в классе', *[k for k, v in school_cl.items() if v['girl'] == max_count_girl])
